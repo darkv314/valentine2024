@@ -1,5 +1,5 @@
 import { IconoirProvider, HeartSolid } from "iconoir-react"
-import { useState } from "react";
+// import { useState } from "react";
 
 type MenuItemProps = {
     image: string;
@@ -11,7 +11,7 @@ let colorHearts = ['#732DB4', '#E56B6F', '#E5989B']
 
 function GalleryItem({ image, title }: MenuItemProps) {
 
-    const [modalOpen, setModalOpen] = useState(false);
+    // const [modalOpen, setModalOpen] = useState(false);
 
     const onClick = () => {
         // setModalOpen(true);
@@ -20,7 +20,7 @@ function GalleryItem({ image, title }: MenuItemProps) {
 
     return (
         <>
-            {modalOpen && <div className="fixed h-[100dvh] w-[100%] bg-[#0000008c] top-0 z-10 max-h-[100vh]"></div>}
+            {/* {modalOpen && <div className="fixed h-[100dvh] w-[100%] bg-[#0000008c] top-0 z-10 max-h-[100vh]"></div>} */}
 
 
             <div onClick={onClick} className="flex flex-col gap-2 bg-[#f9f5ff] p-4 justify-center items-center relative rounded-md hover:scale-105 transition-all cursor-pointer">
