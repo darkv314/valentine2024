@@ -39,22 +39,36 @@ const Us = () => {
   ]
   const [modalOpen, setModalOpen] = useState(false)
   const [activeImage, setActiveImage] = useState('')
-
-  useEffect(() => {
-    if (modalOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = 'auto'
-    }
-  }, [modalOpen]);
+  const [activeImageIndex, setActiveImageIndex] = useState(0)
 
   const modalClick = () => {
     setModalOpen(false)
   }
 
+  useEffect(() => {
+    const handleKeyDown = (event: any) => {
+      if (event.key === 'ArrowLeft') {
+        setActiveImageIndex((prevIndex) =>
+          prevIndex > 0 ? prevIndex - 1 : images.length - 1
+        );
+      } else if (event.key === 'ArrowRight') {
+        setActiveImageIndex((prevIndex) =>
+          prevIndex < images.length - 1 ? prevIndex + 1 : 0
+        );
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [images]);
+
+  useEffect(() => {
+    setActiveImage(images[activeImageIndex]);
+  }, [activeImageIndex]);
+
   return (
     <>
-      {modalOpen && <div onClick={() => modalClick()} className="flex fixed bottom-0 left-0 right-0 h-[100dvh] w-[100%] bg-[#0000008c] top-0 z-10 max-h-[100vh] items-center justify-center">
+      {modalOpen && <div onClick={() => modalClick()} className="flex fixed h-[100dvh] w-[100%] bg-[#0000008c] top-0 z-10 items-center justify-center">
         <img onClick={(e) => e.stopPropagation()} src={activeImage} alt="Active image" className='object-contain h-[80%] rounded-lg' />
         <button>
           <IconoirProvider>
@@ -63,12 +77,12 @@ const Us = () => {
         </button>
 
       </div>}
-      <div style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr)', overflow: `${modalOpen ? 'hidden' : 'none'}` }} className='grid p-4 w-full gap-8 items-center justify-items-center'>
+      <div style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr)' }} className='grid p-4 w-full gap-8 items-center justify-items-center'>
         {
           images.map((image, index) => {
             return (
               <GalleryItem
-                onClick={() => { setModalOpen(true); setActiveImage(image) }}
+                onClick={() => { setModalOpen(true); setActiveImage(image); setActiveImageIndex(index) }}
                 key={index}
                 image={image}
               />
