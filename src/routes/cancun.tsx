@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
 const Cancun = () => {
-    const countDownDate = new Date("May 21, 2024 00:00:00").getTime();
+    const countDownDate = new Date("Mar 7, 2025 00:00:00").getTime();
     const [message, setMessage] = useState('');
 
     useEffect(() => {

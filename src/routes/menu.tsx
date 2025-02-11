@@ -25,7 +25,7 @@ const Menu = () => {
             />
             <MenuItem
                 image={us2}
-                title="Cancun 🏖️"
+                title="Argentina :3 🍖"
                 to='/cancun'
             />
         </div>
